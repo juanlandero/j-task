@@ -1,0 +1,108 @@
+
+body {
+    background-color: #fff;
+}
+
+a {
+    text-decoration: none;
+}
+
+.aside-item {
+    border-left: 3px solid #fff;
+    line-height: 1.5;
+    padding: 0.9rem 0rem;
+    position: relative;
+    text-align: center;
+    color: #caced1;
+    /* display: flex; */
+    align-items: center;
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+  
+a.aside-item {
+    cursor: pointer;
+}
+  
+a.aside-item:hover {
+    border-left: 3px solid #01579b;
+    color: #01579b;
+}
+
+a.aside-item.active {
+    border-left: 3px solid #01579b;
+    color: #01579b;
+}
+  
+.container-side {
+    background-color: #fff;
+    position: fixed;
+    top: 50px;
+    width: 60px;
+    height: calc(100% - 2.9rem);
+    z-index: 1;
+    padding-top: 1.5%;
+    border-right: 1px solid #f4f6f6;
+}
+  
+.menu {
+    background-color: #fff;
+    height: 100%;
+    overflow-y: scroll;
+}
+  
+.container-dash {
+    position: absolute;
+    top: 70px;
+    left: 61px;
+    right: 12px;
+}
+
+.presente {
+    background-color: #46a14a;
+    color: white;
+}
+  
+.ausente {
+    background-color: #ff3860;
+    color: white;
+}
+  
+.color-dng {
+    color: #ff3860;
+}
+  
+.color-scss {
+    color: #46a14a;
+}
+  
+/*# sourceMappingURL=dashboard.css.map */
+  
+
+.card.card-cascade .view.view-cascade.gradient-card-header {
+	padding: 1.6rem 1rem;
+	color: #fff;
+	text-align: center;
+}
+
+.card.card-cascade .view.view-cascade {
+	border-radius: .25rem;
+	-webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+	box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+}
+.view {
+	position: relative;
+	overflow: hidden;
+	cursor: default;
+}
+
+.blue-gradient {
+	background: linear-gradient(40deg,#45cafc,#303f9f) !important;
+}
+
+.navbar.navbar-dark .breadcrumb .nav-item .nav-link, .navbar.navbar-dark .navbar-nav .nav-item .nav-link {
+	color: #fff;
+	-webkit-transition: .35s;
+	transition: .35s;
+}
