@@ -16,14 +16,23 @@ class CreateAlumnosGruposTable extends Migration
         Schema::create('alumnos_grupos', function (Blueprint $table) {
             $table->increments('pk_alumno_grupo');
 
-            $table->unsignedInteger('pk_usuario');
-            $table->foreign('pk_usuario')->references('pk_usuario')->on('users');
+            $table->unsignedInteger('alumno_pk_usuario');
+            $table->foreign('alumno_pk_usuario')->references('pk_usuario')->on('users');
 
             $table->unsignedInteger('pk_grupo');
             $table->foreign('pk_grupo')->references('pk_grupo')->on('grupos');
 
             $table->timestamps();
         });
+
+        DB::statement("INSERT INTO  alumnos_grupos
+            (
+                pk_alumno_grupo, alumno_pk_usuario, pk_grupo, created_at 
+            )
+            VALUES
+                (1, 3, 1, NOW()),
+                (2, 4, 2, NOW())
+        ");
     }
 
     /**

@@ -16,8 +16,8 @@ class CreateAlumnosTareasTable extends Migration
         Schema::create('alumnos_tareas', function (Blueprint $table) {
             $table->increments('pk_alumno_tarea');
 
-            $table->unsignedInteger('pk_usuario');
-            $table->foreign('pk_usuario')->references('pk_usuario')->on('users');
+            $table->unsignedInteger('alumno_pk_usuario');
+            $table->foreign('alumno_pk_usuario')->references('pk_usuario')->on('users');
 
             $table->unsignedInteger('pk_tarea');
             $table->foreign('pk_tarea')->references('pk_tarea')->on('tareas');

@@ -16,6 +16,7 @@ class CreateAlumnosTareasRecursosTable extends Migration
         Schema::create('alumnos_tareas_recursos', function (Blueprint $table) {
             $table->increments('pk_alumno_tarea_recurso');
             $table->string('recurso');
+            $table->string('url');
 
             $table->unsignedInteger('pk_alumno_tarea');
             $table->foreign('pk_alumno_tarea')->references('pk_alumno_tarea')->on('alumnos_tareas');

@@ -28,6 +28,17 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::statement("INSERT INTO  users
+            (
+                pk_usuario, name, first_name, second_name, pk_usuario_tipo, email, email_verified_at, password, remember_token, created_at
+            )
+            VALUES
+                (1, 'Juan Carlos', 'Landero', 'Isidro', '2', 'jc_l23@hotmail.com', null, '" . bcrypt('gtrealmadrid21') . "', null, NOW()),
+                (2, 'Ricardo', 'Lopez', 'Roman', '2', 'ricardo@hotmail.com', null, '" . bcrypt('12345678') . "', null, NOW()),
+                (3, 'Carlos', 'Landero', 'Isidro', '3', 'jcarlos210193@gmail.com', null, '" . bcrypt('gtrealmadrid21') . "', null, NOW()),
+                (4, 'Diana', 'Jimenez', 'Sanchez', '3', 'diana@gmail.com', null, '" . bcrypt('12345678') . "', null, NOW())
+        ");
     }
 
     /**

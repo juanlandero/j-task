@@ -18,8 +18,8 @@ class CreateMateriasTable extends Migration
             $table->string('materia');
             $table->string('color', 10);
 
-            $table->unsignedInteger('pk_usuario');
-            $table->foreign('pk_usuario')->references('pk_usuario')->on('users');
+            $table->unsignedInteger('docente_pk_usuario');
+            $table->foreign('docente_pk_usuario')->references('pk_usuario')->on('users');
 
             $table->unsignedInteger('pk_grupo');
             $table->foreign('pk_grupo')->references('pk_grupo')->on('grupos');
