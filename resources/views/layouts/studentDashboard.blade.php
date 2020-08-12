@@ -24,9 +24,9 @@
 <body>
     <div id="app">
         <!-- Navbar -->
-        <nav class="mb-1 navbar z-depth-0" style="z-index: 10; border-bottom: 1px solid #f4f6f6; background-color: #fff;">
+        <nav class="mb-1 navbar z-depth-0" style="z-index: 10; background-color: #fff;">
             <div class="container">
-                <span class="navbar-brand">Alumno</span>
+                <span class="navbar-brand">{{ Auth::user()->name }} {{ Auth::user()->first_name }} {{ Auth::user()->second_name }}</span>
 
                 {{-- <button class="navbar-toggler" style="color: red" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
                     aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@
                         </a>
                     </li> --}}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle indigo-text" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
@@ -66,7 +66,7 @@
                     </span>                
                 </a>
 
-                <a class="aside-item" title="Grupos" href="{{ route('student.task') }}">
+                <a class="aside-item" title="Tareas" href="{{ route('student.task') }}">
                     <span class="icon is-large">
                         <i class="fas fa-lg fa-clipboard-list"></i>
                     </span>                
@@ -79,7 +79,7 @@
     
             <div class="container">
                 <div class="row">
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
                                 <p class="h4 blue-grey-text">@yield('titulo')</p>

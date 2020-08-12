@@ -39,11 +39,11 @@ class AlumnoGrupoController extends Controller
     public function setGrade(Request $r){
 
         if (Auth::check()) {
-            $usuario = DB::table('alumnos_grupos')->where('pk_usuario', Auth::user()->pk_usuario)->count();
+            $usuario = DB::table('alumnos_grupos')->where('alumno_pk_usuario', Auth::user()->pk_usuario)->count();
             if ($usuario == 0) {
                 $nuevoAg = new AlumnoGrupo;
 
-                $nuevoAg->pk_usuario    = Auth::user()->pk_usuario;
+                $nuevoAg->alumno_pk_usuario    = Auth::user()->pk_usuario;
                 $nuevoAg->pk_grupo      = $r['nivel'];
                 $nuevoAg->save();
 

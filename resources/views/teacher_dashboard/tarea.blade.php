@@ -4,20 +4,13 @@
 
 @section('titulo', 'Tareas')
 
-@section('acciones-encabezado')
-<div class="col-md-8 text-center">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTask">
-        Nueva tarea
-    </button>
-</div>
-@endsection
-
 @section('contenido')
     <div class="row mt-4" id="task">
         <card-tarea v-for="tarea in tareas"
                     v-bind:key = "tarea.pk_tarea"
+                    :pk_tarea = "tarea.pk_tarea"
                     :materia = "tarea.materia"
+                    :materia_color = "tarea.color"
                     :docente = "tarea.name"
                     :grupo = "tarea.grupo"
                     :tarea = "tarea.tarea_titulo"
@@ -25,58 +18,25 @@
                     :fecha_entrega = "tarea.fecha_entrega"
         ></card-tarea>
 
-        <!-- Modal -->
-        <div class="modal fade" id="modalTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form id="nueva-tarea" method="GET" @submit.prevent="newTask">
-                            @csrf
-                            <div data-test="card-body" class="card-body">
-                                <div class="md-form md-outline">
-                                    <input type="text" id="titulo"v-model="nuevaTarea.titulo" class="form-control">
-                                    <label for="titulo">Titulo</label>
-                                </div>
-                                <div class="md-form md-outline">
-                                    <input type="text" id="descripcion"v-model="nuevaTarea.detalle" class="form-control">
-                                    <label for="descripcion">Descripción</label>
-                                </div>
-                                <select class="browser-default custom-select" v-model="nuevaTarea.materia">
-                                    <option disabled selected>Materia</option>
-                                    @foreach ($materias as $materia)
-                                        <option value="{{ $materia->pk_materia }}">{{ $materia->materia }}</option>                                        
-                                    @endforeach
-                                </select>
-                                <div class="md-form md-outline">
-                                    <input type="text" id="fecha"v-model="nuevaTarea.fecha" class="form-control">
-                                    <label for="titulo">Fecha de entrega:  2020-01-01 14:00:00</label>
-                                </div>
-                                <button class="btn btn-info btn-block mt-3" type="submit">Crear</button>
-                            </div>
-                        </form>
-                    </div>
-                
-                </div>
-            </div>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-lg grey waves-effect waves-light" data-toggle="modal" data-target="#modalNuevaTarea">
+                <i class="fas fa-plus"></i>
+            </a>
         </div>
+
+        @include('teacher_dashboard.modal.nueva-tarea')
     </div>
 @endsection
 
 @section('js')
-
 <script src="{{ asset('js/jquery.datetimepicker.js') }}" ></script>
-<script>
-
-$( document ).ready(function() {
-  // Date Time Picker Initialization
-  $('.date-time').dateTimePicker();
-});
-</script>
 
 <script>
 Vue.component('card-tarea', {
     props: [
+        'pk_tarea',
         'materia',
+        'materia_color',
         'docente',
         'grupo',
         'tarea',
@@ -85,23 +45,31 @@ Vue.component('card-tarea', {
     ],
     template: `
     <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card card-cascade">
-            <div class="view view-cascade gradient-card-header blue-gradient">
-                <h3 class="card-header-title mb-3">@{{ materia }}</h3>
-                <p class="card-header-subtitle mb-0">@{{ tarea }}</p>
+        <div class="br br-body">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <i class="fas fa-apple-alt fa-lg z-depth-1 p-4 text-white" :style="'background-color:' + materia_color" style="border-radius: 20%"></i>
+                </div>
+                <div class="col-8 text-right">
+                    <p class="text-uppercase text-muted mb-1"><small>@{{ materia }} - @{{ grupo }}</small></p>
+                    <p class="font-weight-bold mb-0">@{{ tarea }}</p>
+                </div>
             </div>
-
-            <div class="card-body card-body-cascade text-center">
-
-                <p class="card-text">@{{ detalle }}</p>
-                <hr>
-                <p class="text-muted">@{{ grupo }} - Prof. @{{ docente }}</p>
-
+            <div class="row text-center pt-4">
+                <div class="col-12 px-4">
+                    <p class="text-truncate text-center">@{{ detalle }}</p>
+                </div>
             </div>
-
-            <div class="card-footer text-muted text-center">Entrega: @{{ fecha_entrega }}</div>
+            <div class="progress md-progress" style="height: 20px">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 80%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Entregas 25%</div>
+            </div>
+            <div class="row text-center pt-4">
+                <div class="col-4"><a href="#"><i class="far fa-lg fa-grin-alt"></i></a></div>
+                <div class="col-4"><a href="#"><i class="fas fa-lg fa-archive"></i></a></div>
+                <div class="col-4"><a :href="'subject-task/get/' + pk_tarea" target="_blank" ><i class="fas fa-lg fa-file-signature"></i></a></div>
+            </div>           
         </div>
-    </div>
+    </div> 
     `,
 })
 
@@ -110,12 +78,6 @@ var appTarea = new Vue({
     el: '#task',
     data: {
         tareas: [],
-        nuevaTarea: {
-            materia: null,
-            titulo: null,
-            detalle: null,
-            fecha: null,
-        },
     },
     mounted: function () {
         this.getTask()
@@ -123,6 +85,7 @@ var appTarea = new Vue({
     methods: {
         getTask(){
             var _that = this
+            var data = $('form#nueva-materia').serializeArray();
 
             axios.get('/teacher/task/get')
                 .then(response => {
@@ -131,14 +94,13 @@ var appTarea = new Vue({
         },
         newTask(){
             var _that = this
+            var data = $('form#nueva-tarea').serializeArray();
 
-            axios.get('/teacher/task/new', {
-                params: {
-                    materia: _that.nuevaTarea.materia,
-                    titulo: _that.nuevaTarea.titulo,
-                    detalle: _that.nuevaTarea.detalle,
-                    fecha: _that.nuevaTarea.fecha
-                }
+            axios.post('/teacher/task/new', {
+                    titulo: data[1].value,
+                    detalle: data[2].value,
+                    materia: data[3].value,
+                    fecha: data[4].value
             })
             .then(response => {
                 _that.getTask()
@@ -146,11 +108,13 @@ var appTarea = new Vue({
             })
         },
         clearForm(){
-            this.nuevaTarea.materia = null
-            this.nuevaTarea.titulo = null
-            this.nuevaTarea.detalle = null
-            this.nuevaTarea.fecha = null
+	        $("form#nueva-tarea")[0].reset();
         },
+        reviewTask(pk_tarea){
+
+            var url = 'subject-task/get/' + pk_tarea
+            window.open(url, "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=600, height=400");
+        }
     }
 })
 

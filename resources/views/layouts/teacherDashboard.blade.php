@@ -18,15 +18,17 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('dist/spectrum.css') }}" rel="stylesheet">
     @section('css')
     @show
 </head>
 <body>
     <div id="app">
         <!-- Navbar -->
-        <nav class="mb-1 navbar z-depth-0" style="z-index: 10; border-bottom: 1px solid #f4f6f6; background-color: #fff;">
+        <nav class="mb-1 navbar z-depth-0 fixed-top" style="z-index: 10; background-color: #fff;">
             <div class="container">
-                <span class="navbar-brand">Docente</span>
+                <span class="navbar-brand">@yield('titulo')</span>
 
                 {{-- <button class="navbar-toggler" style="color: red" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
                     aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,8 +42,8 @@
                         </a>
                     </li> --}}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"></i>
+                        <a class="nav-link dropdown-toggle indigo-text" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user"></i> 
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
                             <h6 class="dropdown-header">{{ Auth::user()->name }} {{ Auth::user()->first_name }} {{ Auth::user()->second_name }}</h6>
@@ -90,17 +92,7 @@
     
             <div class="container">
                 <div class="row">
-                    <div class="col-md-11">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <p class="h4 blue-grey-text">@yield('titulo')</p>
-                            </div>
-
-                            @section('acciones-encabezado')
-                                
-                            @show
-                        </div>
-
+                    <div class="col-md-12">
                         @section('contenido')
                         @show
                     </div>
@@ -118,10 +110,23 @@
     <script src="{{ asset('js/popper.min.js') }}" ></script>
     <script src="{{ asset('js/bootstrap.min.js') }}" ></script>
     <script src="{{ asset('js/mdb.min.js') }}" ></script>
+
+    <script src="{{ asset('dist/spectrum.js') }}" ></script>
+
     <script >
         $( document ).ready(function() {
             $('.dropdown-toggle').dropdown();
-        });
+
+
+            $('#color-picker').spectrum({
+                type: "component",
+                showPaletteOnly: "true",
+                togglePaletteOnly: "true",
+                hideAfterPaletteSelect: "true",
+                showInput: "true",
+                showAlpha: "false"
+            });
+        })
     </script>
 
     @section('js')

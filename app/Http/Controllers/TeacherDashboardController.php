@@ -34,7 +34,7 @@ class TeacherDashboardController extends Controller
 
     public function task(){
         $pk_usuario = Auth::user()->pk_usuario;
-        $objMaterias = DB::table('materias')->where('pk_usuario', $pk_usuario)->get();
+        $objMaterias = DB::table('materias')->where('docente_pk_usuario', $pk_usuario)->get();
 
         return view('teacher_dashboard.tarea', ['materias' => $objMaterias]);
     }

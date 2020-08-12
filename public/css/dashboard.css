@@ -43,7 +43,7 @@ a.aside-item.active {
     height: calc(100% - 2.9rem);
     z-index: 1;
     padding-top: 1.5%;
-    border-right: 1px solid #f4f6f6;
+    /* border-right: 1px solid #fff; */
 }
   
 .menu {
@@ -54,29 +54,17 @@ a.aside-item.active {
   
 .container-dash {
     position: absolute;
-    top: 70px;
+    background-color: #f7f7f7;
+    border-radius: 15px 0px 0px 0px;
+    top: 58px;
     left: 61px;
-    right: 12px;
+    right: 0px;
+    bottom: 0px;
+    padding-right: 12px;
+    padding-left: 10px;
+    padding-top: 10px;
 }
 
-.presente {
-    background-color: #46a14a;
-    color: white;
-}
-  
-.ausente {
-    background-color: #ff3860;
-    color: white;
-}
-  
-.color-dng {
-    color: #ff3860;
-}
-  
-.color-scss {
-    color: #46a14a;
-}
-  
 /*# sourceMappingURL=dashboard.css.map */
   
 
@@ -105,4 +93,76 @@ a.aside-item.active {
 	color: #fff;
 	-webkit-transition: .35s;
 	transition: .35s;
+}
+
+.btn-rounded{
+    border-radius: 30px;
+}
+
+.br{
+    border-radius: 15px;
+    background-color:white;
+}
+
+.br-body {
+    padding: 20px 15px;
+    height: 100%;
+}
+
+.btn-floating::before {
+	border-radius: 0;
+}
+.btn-floating.btn-lg {
+	width: 61.1px;
+	height: 61.1px;
+}
+
+.btn-floating {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	padding: 0;
+	margin: 10px;
+	overflow: hidden;
+	vertical-align: middle;
+	cursor: pointer;
+	border-radius: 50%;
+	-webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+	box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+	-webkit-transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out;
+	width: 47px;
+	height: 47px;
+}
+
+
+
+.btn-floating.btn-lg i {
+	font-size: 1.625rem;
+	line-height: 61.1px;
+}
+.btn-floating i {
+	display: inline-block;
+	width: inherit;
+	color: #fff;
+	text-align: center;
+}
+.fixed-action-btn {
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+	z-index: 998;
+	margin-bottom: 0;
+	overflow: hidden;
+	height: 500px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: end;
+	-ms-flex-align: end;
+	align-items: flex-end;
+	padding: 15px 15px 15px 15px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
